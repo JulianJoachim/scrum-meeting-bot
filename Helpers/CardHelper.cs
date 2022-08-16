@@ -39,5 +39,41 @@ namespace CallingBotSample.Helpers
 
             return welcomeCardAttachment;
         }
+
+        public Attachment GetInfoCardAttachment()
+        {
+            var infoCardAttachment = new Attachment();
+            try
+            {
+                string[] infoCardPaths = { ".", "Resources", "InfoCard.json" };
+                var infoCardString = File.ReadAllText(Path.Combine(infoCardPaths));
+                infoCardAttachment.ContentType = "application/vnd.microsoft.card.adaptive";
+                infoCardAttachment.Content = JsonConvert.DeserializeObject(infoCardString);
+            }
+            catch (System.Exception ex)
+            {
+                this.logger.LogError(ex, ex.Message);
+            }
+
+            return infoCardAttachment;
+        }
+
+        public Attachment GetReportCardAttachment()
+        {
+            var reportCardAttachment = new Attachment();
+            try
+            {
+                string[] reportCardPaths = { ".", "Resources", "ReportCard.json" };
+                var reportCardString = File.ReadAllText(Path.Combine(reportCardPaths));
+                reportCardAttachment.ContentType = "application/vnd.microsoft.card.adaptive";
+                reportCardAttachment.Content = JsonConvert.DeserializeObject(reportCardString);
+            }
+            catch (System.Exception ex)
+            {
+                this.logger.LogError(ex, ex.Message);
+            }
+
+            return reportCardAttachment;
+        }
     }
 }

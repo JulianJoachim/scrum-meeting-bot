@@ -1,0 +1,102 @@
+{
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "type": "AdaptiveCard",
+    "version": "1.4",
+    "body": [
+        {
+            "type": "TextBlock",
+            "size": "Medium",
+            "weight": "Bolder",
+            "wrap": true,
+            "text": "Scrumbeitrag - schriftlich"
+        },
+        {
+            "type": "TextBlock",
+            "wrap": true,
+            "text": "Bitte trage für jeden Unterpunkt etwas ein."
+        }
+    ],
+    "actions": [
+        {
+            "type": "Action.ShowCard",
+            "card": {
+                "type": "AdaptiveCard",
+                "body": [
+                    {
+                        "type": "TextBlock",
+                        "text": "Wie lief dein letzter Arbeitstag?",
+                        "size": "Medium",
+                        "wrap": true
+                    },
+                    {
+                        "type": "Input.ChoiceSet",
+                        "id": "Progress",
+                        "style": "expanded",
+                        "choices": [
+                            {
+                                "title": "Das geplante wurde erledigt.",
+                                "value": "alldone"
+                            },
+                            {
+                                "title": "Das meiste wurde erledigt.",
+                                "value": "mostlydone"
+                            },
+                            {
+                                "title": "Es kam zu Komplikationen.",
+                                "value": "complications"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Input.Text",
+                        "id": "textFieldToday",
+                        "placeholder": "Trage hier Details deines Tages ein. (optional)",
+                        "isMultiline": true
+                    }
+                ],
+                "actions": [
+                    {
+                        "type": "Action.Submit",
+                        "title": "Senden",
+                        "data": {
+                            "FoodChoice": "Steak"
+                        }
+                    }
+                ],
+                "$schema": "http://adaptivecards.io/schemas/adaptive-card.json"
+            },
+            "title": "Tagesablauf gestern"
+        },
+        {
+            "type": "Action.ShowCard",
+            "title": "Tagesplan heute",
+            "card": {
+                "type": "AdaptiveCard",
+                "body": [
+                    {
+                        "type": "TextBlock",
+                        "text": "Was steht heute an?",
+                        "size": "Medium",
+                        "wrap": true
+                    },
+                    {
+                        "type": "Input.Text",
+                        "id": "textFieldTmrw",
+                        "isMultiline": true,
+                        "placeholder": "Schreibe gerne in knappen Stichpunkten."
+                    }
+                ],
+                "actions": [
+                    {
+                        "type": "Action.Submit",
+                        "title": "OK",
+                        "data": {
+                            "FoodChoice": "Chicken"
+                        }
+                    }
+                ],
+                "$schema": "http://adaptivecards.io/schemas/adaptive-card.json"
+            }
+        }
+    ]
+}

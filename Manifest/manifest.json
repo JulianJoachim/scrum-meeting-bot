@@ -34,5 +34,5 @@
         }
     ],
     "permissions": [ "identity", "messageTeamMembers" ],
-    "validDomains": [ "https://c5cc-2a02-8109-9a40-29e4-b4fb-ffc3-f2bb-baa.eu.ngrok.io" ]
+    "validDomains": [ "https://f3e9-2a02-8109-9a40-29e4-3957-799b-7055-841f.eu.ngrok.io" ]
 }

@@ -12,5 +12,7 @@ namespace CallingBotSample.Interfaces
     public interface ICard
     {
         Attachment GetWelcomeCardAttachment();
+        Attachment GetInfoCardAttachment();
+        Attachment GetReportCardAttachment();
     }
 }

@@ -1,11 +1,11 @@
 {
     "$schema": "https://github.com/OfficeDev/microsoft-teams-app-schema/blob/preview/DevPreview/MicrosoftTeams.schema.json",
     "manifestVersion": "devPreview",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "id": "944588c9-67a2-4ad4-b6c9-eb68e8b31a0a",
     "packageName": "com.acs.sample",
     "developer": {
-        "name": "Contoso",
+        "name": "Julian Joachim",
         "websiteUrl": "https://example.azurewebsites.net",
         "privacyUrl": "https://teams.microsoft.com",
         "termsOfUseUrl": "https://teams.microsoft.com"
@@ -34,5 +34,5 @@
         }
     ],
     "permissions": [ "identity", "messageTeamMembers" ],
-    "validDomains": [ "https://c5cc-2a02-8109-9a40-29e4-b4fb-ffc3-f2bb-baa.eu.ngrok.io" ]
+    "validDomains": [ "https://f3e9-2a02-8109-9a40-29e4-3957-799b-7055-841f.eu.ngrok.io" ]
 }

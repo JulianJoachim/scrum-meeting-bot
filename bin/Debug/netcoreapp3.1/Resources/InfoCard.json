@@ -1,0 +1,31 @@
+{
+    "type": "AdaptiveCard",
+    "body": [
+        {
+            "type": "TextBlock",
+            "size": "Medium",
+            "weight": "Bolder",
+            "text": "Scrum - Daily Meeting Bot"
+        }
+    ],
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.4",
+    "actions": [
+        {
+            "type": "Action.Submit",
+            "id": "register",
+            "data": {
+                "type": "register"
+            },
+            "title": "Register me"
+        },
+        {
+            "type": "Action.Submit",
+            "title": "Start Meeting",
+            "id": "newgc",
+            "data": {
+                "type": "newgc"
+            }
+        }
+    ]
+}
