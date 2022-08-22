@@ -6,21 +6,21 @@
     "packageName": "com.acs.sample",
     "developer": {
         "name": "Julian Joachim",
-        "websiteUrl": "https://example.azurewebsites.net",
-        "privacyUrl": "https://teams.microsoft.com",
-        "termsOfUseUrl": "https://teams.microsoft.com"
+        "websiteUrl": "https://github.com/JulianJoachim/scrum-meeting-bot",
+        "privacyUrl": "https://github.com/JulianJoachim/scrum-meeting-bot",
+        "termsOfUseUrl": "https://github.com/JulianJoachim/scrum-meeting-bot"
     },
     "icons": {
         "color": "color.png",
         "outline": "outline.png"
     },
     "name": {
-        "short": "Calling bot",
-        "full": "Calling bot"
+        "short": "Scrum Bot",
+        "full": "Daily Scrum Meeting Bot"
     },
     "description": {
-        "short": "Calling bot",
-        "full": "Calling bot"
+        "short": "A Bot to start and optimize Daily Scrum Meetings.",
+        "full": "A Bot to start and optimize Daily Scrum Meetings."
     },
     "accentColor": "#FFFFFF",
     "bots": [

@@ -21,11 +21,27 @@
         },
         {
             "type": "Action.Submit",
-            "title": "Start Meeting",
-            "id": "newgc",
+            "title": "Start Daily Scrum",
+            "id": "dailyscrum",
             "data": {
-                "type": "newgc"
+                "type": "dailyscrum"
             }
+        },
+        {
+            "type": "Action.Submit",
+            "id": "reportSick",
+            "data": {
+                "type": "reportSick"
+            },
+            "title": "Abwesend melden"
+        },
+        {
+            "type": "Action.Submit",
+            "id": "report",
+            "data": {
+                "type": "report"
+            },
+            "title": "Scrum Report"
         }
     ]
 }

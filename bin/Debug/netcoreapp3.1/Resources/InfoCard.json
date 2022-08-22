@@ -26,6 +26,22 @@
             "data": {
                 "type": "newgc"
             }
+        },
+        {
+            "type": "Action.Submit",
+            "id": "reportSick",
+            "data": {
+                "type": "reportSick"
+            },
+            "title": "Abwesend melden"
+        },
+        {
+            "type": "Action.Submit",
+            "id": "report",
+            "data": {
+                "type": "report"
+            },
+            "title": "Scrum Report"
         }
     ]
 }
