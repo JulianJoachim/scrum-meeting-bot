@@ -144,7 +144,6 @@ namespace CallingBotSample.Bots
                 {
                     string type = value["type"];
                     type = string.IsNullOrEmpty(type) ? "." : type.ToLower();
-                    System.Console.WriteLine("DAS IST TYPE " + type);
                     await SendReponse(turnContext, type, cancellationToken);
                 }
             }
@@ -160,110 +159,11 @@ namespace CallingBotSample.Bots
             var senderName = turnContext.Activity.From.Name;
             switch (input)
             {
-                case "createcall":
-                    var call = await graph.CreateCallAsync();
-                    if (call != null)
-                    {
-                        await turnContext.SendActivityAsync("Placed a call Successfully.");
-                    }
-                    break;
-                case "transfercall":
-                    var sourceCallResponse = await graph.CreateCallAsync();
-                    if (sourceCallResponse != null)
-                    {
-                        await turnContext.SendActivityAsync("Transferring the call!");
-                        await graph.TransferCallAsync(sourceCallResponse.Id);
-                    }
-                    break;
-                case "joinscheduledmeeting":
-                    var onlineMeeting = await graph.CreateOnlineMeetingAsync();
-                    if (onlineMeeting != null)
-                    {
-                        var statefullCall = await graph.JoinScheduledMeeting(onlineMeeting.JoinWebUrl);
-                        if (statefullCall != null)
-                        {
-                            await turnContext.SendActivityAsync($"[Click here to Join the meeting]({onlineMeeting.JoinWebUrl})");
-                        }
-                    }
-                    break;
-                case "inviteparticipant":
-                    var meeting = await graph.CreateOnlineMeetingAsync();
-                    if (meeting != null)
-                    {
-                        var statefullCall = await graph.JoinScheduledMeeting(meeting.JoinWebUrl);
-                        if (statefullCall != null)
-                        {
-                            graph.InviteParticipant(statefullCall.Id);
-                            await turnContext.SendActivityAsync("Invited participant successfuly");
-                            var organizer = meeting.Participants.Organizer;
-                            var role = organizer.Role;
-                            await turnContext.SendActivityAsync(organizer.Upn);
-                            //await turnContext.SendActivityAsync(role + " role");
-                            await turnContext.SendActivityAsync(organizer.Identity.User.Id);
-                            var username = organizer.Identity.User.DisplayName;
-                            if (username != null)
-                            {                            
-                                await turnContext.SendActivityAsync(username);
-                            }
-
-                        }
-                    }
-                    break;
-                case "new":
-                    System.Console.WriteLine("Creating new Meeting...");
-                    var newOnlineMeeting = new OnlineMeeting
-                    {
-	                    StartDateTime = DateTimeOffset.Parse("2022-08-07T23:00:00.2444915+00:00"),
-	                    EndDateTime = DateTimeOffset.Parse("2022-08-07T23:01:00.2444915+00:00"),
-	                    Subject = "User Token Meeting"
-                    };
-                    var meeting1 = await graphServiceClient.Users["95ff13bf-1f12-45ce-84a2-5031ef044785"].OnlineMeetings.Request().AddAsync(newOnlineMeeting);
-
-                    System.Console.WriteLine("1");
-                    System.Console.WriteLine(meeting1.JoinWebUrl);
-                    System.Console.WriteLine(meeting1.Participants);
-                    System.Console.WriteLine(meeting1.Subject);
-                    System.Console.WriteLine(meeting1.StartDateTime);
-                    System.Console.WriteLine("2");
-                    break;
-                case "newc":
-                    var newCall = new Call
-                    {
-	                    CallbackUri = "https://bot.contoso.com/callback",
-	                    Targets = new List<InvitationParticipantInfo>()
-	                    {
-		                    new InvitationParticipantInfo
-		                    {
-			                    Identity = new IdentitySet
-			                    {   
-                                    User = new Identity
-                                    {
-                                        DisplayName = "Julian Joachim",
-                                        Id = "95ff13bf-1f12-45ce-84a2-5031ef044785"
-                                    }
-			                    }
-		                    }
-	                    },
-	                    RequestedModalities = new List<Modality>()
-	                    {
-		                    Modality.Audio
-	                    },
-	                    MediaConfig = new ServiceHostedMediaConfig
-	                    {
-	                    },
-                        TenantId = "1ff8950e-9285-4c2e-80fc-5522c267a97e"
-                    };
-
-                    var callinfo = await graphServiceClient.Communications.Calls.Request().AddAsync(newCall);
-                    System.Console.WriteLine("1");
-                    System.Console.Write(callinfo);
-                    System.Console.WriteLine("2");
-                    break;
-                case "newgc":
-                    var newgc = new Call
+                case "dailyscrum":
+                    var scrumCall = new Call
                     {
 	                    Direction = CallDirection.Outgoing,
-	                    Subject = "Create a group call with service hosted media",
+	                    Subject = "Erstellt einen Gruppenanruf mit den registrierten Mitgliedern",
 	                    CallbackUri = "https://bot.contoso.com/callback",
                         Source = new ParticipantInfo
 	                    {
@@ -278,72 +178,6 @@ namespace CallingBotSample.Bots
 	                    },
 	                    Targets = new List<InvitationParticipantInfo>()
 	                    {
-		                    new InvitationParticipantInfo
-		                    {
-			                    Identity = new IdentitySet
-			                    {   
-                                    User = new Identity
-                                    {
-                                        DisplayName = "Julian Joachim",
-                                        Id = "95ff13bf-1f12-45ce-84a2-5031ef044785"
-                                    }
-			                    }
-		                    },
-                            new InvitationParticipantInfo
-                            {
-                                Identity = new IdentitySet
-                                {
-                                    User = new Identity
-                                    {
-                                        DisplayName = "Adele Vance",
-                                        Id = "1e8dd5e7-2ab0-4ca0-b6e7-d388298b22b6"
-                                    }
-                                }
-                            },
-                            new InvitationParticipantInfo
-                            {
-                                Identity = new IdentitySet
-                                {
-                                    User = new Identity
-                                    {
-                                        DisplayName = "Lee Gu",
-                                        Id = "6745a81d-d72b-4010-94de-0a50a01dcc5d"
-                                    }
-                                }
-                            },
-                            new InvitationParticipantInfo
-                            {
-                                Identity = new IdentitySet
-                                {
-                                    User = new Identity
-                                    {
-                                        DisplayName = "Miriam Graham",
-                                        Id = "14874bcb-158f-443b-ae7d-001a2294ca70"
-                                    }
-                                }
-                            },
-                            new InvitationParticipantInfo
-                            {
-                                Identity = new IdentitySet
-                                {
-                                    User = new Identity
-                                    {
-                                        DisplayName = "Pradeep Gupta",
-                                        Id = "a04ccb53-5f49-4f27-85de-4c6c0d89bfbf"
-                                    }
-                                }
-                            },
-                            new InvitationParticipantInfo
-                            {
-                                Identity = new IdentitySet
-                                {
-                                    User = new Identity
-                                    {
-                                        DisplayName = "Henrietta Mueller",
-                                        Id = "1ad1d8cb-78e4-4aff-9bbb-97759ee1a761"
-                                    }
-                                }
-                            }
 	                    },
 	                    RequestedModalities = new List<Modality>()
 	                    {
@@ -355,26 +189,17 @@ namespace CallingBotSample.Bots
                         TenantId = "1ff8950e-9285-4c2e-80fc-5522c267a97e"
                     };
 
-                    System.Console.WriteLine(newgc);
-                    System.Console.WriteLine(newgc.Targets);
-
-                    newgc.Targets = getParticipants();
-
-                    foreach (var parti in newgc.Targets)
-                    {
-                        System.Console.WriteLine(parti.Identity.User.DisplayName);
-                    }
-                    
-                    var gcinfo = await graphServiceClient.Communications.Calls.Request().AddAsync(newgc);
-                    System.Console.WriteLine("1");
-                    System.Console.Write(gcinfo);
-                    System.Console.WriteLine("2");
+                    scrumCall.Targets = getParticipants();
+                    var scrumCallInfo = await graphServiceClient.Communications.Calls.Request().AddAsync(scrumCall);
                     break;
                 case "reportsick":
                     runSQL("UPDATE Employee SET attends = 0 WHERE id = '"+senderId+"';");
-                    // CHECK IF SUCCESS
                     await turnContext.SendActivityAsync("Okay, " + senderName + ", du wurdest für das nächste Meeting ausgetragen. Sollte sich dein Plan ändern, benutzte gerne 'checkin' um dich wieder einzutragen. Andernfalls würden wir uns freuen wenn du einen kleinen schriftlichen Scrumbeitrag abgibst! Auf einen guten Arbeitstag.");
-                    break;        
+                    break;
+                case "checkin":
+                    runSQL("UPDATE Employee SET attends = 1 WHERE id = '"+senderId+"';");
+                    await turnContext.SendActivityAsync("Okay, " + senderName + ", du wurdest für das nächste Meeting wieder eingetragen.");
+                    break;          
                 case "register":
                     try
                     {
@@ -386,13 +211,11 @@ namespace CallingBotSample.Bots
                     {
                         Console.WriteLine(e.ToString());
                         await turnContext.SendActivityAsync("User bereits registriert.");
-
                     } 
 
-                    // CHECK IF SUCCESS
                     break;
                 case "helloworld":
-                    System.Console.WriteLine("Hello World!");
+                    await turnContext.SendActivityAsync("Hello World!.");
                     break;
                 case "help":
                     var helpCard = MessageFactory.Attachment(this.card.GetInfoCardAttachment());
@@ -403,7 +226,7 @@ namespace CallingBotSample.Bots
                     await turnContext.SendActivityAsync(reportCard);
                     break;
                 default:
-                    await turnContext.SendActivityAsync("Welcome to bot. This is what you said: " + input);
+                    await turnContext.SendActivityAsync("Der Command " + input + " existiert nicht.");
                     break;
             }
         }
@@ -459,9 +282,6 @@ namespace CallingBotSample.Bots
         private void runSQL(string sql){
                 using (SqlConnection connection = new SqlConnection(getBuilder().ConnectionString))
                 {
-                    Console.WriteLine("\nQuery data example:");
-                    Console.WriteLine("=========================================\n");
-
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         connection.Open();
